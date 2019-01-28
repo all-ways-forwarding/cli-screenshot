@@ -1,0 +1,16 @@
+{
+  "name": "shifl-screenshot-service",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "deploy": "now && now alias"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "chrome-aws-lambda": "^1.11.2",
+    "express": "^4.16.4",
+    "puppeteer-core": "^1.11.0"
+  }
+}
