@@ -22,11 +22,11 @@ if(process.env.APP_ENV === 'local'){
 
 async function run(req, res) {
     try {
-        const { pathname = '/', query = {} } = parse(req.url, true);
+        const { path = '/', query = {} } = parse(req.url, true);
 
         const { type = 'pdf', quality, fullPage } = query;
 
-        const url = getUrlFromPath(pathname);
+        const url = getUrlFromPath(path);
 
         const qual = getInt(quality);
 
