@@ -1,14 +1,24 @@
-// const express = require('express');
 const { parse } = require('url');
-const axios = require('axios');
+const env = require('dotenv').config()
+
 
 const { getScreenshot } = require('./chromium');
 
 const { getInt, getUrlFromPath, isValidUrl, isValidType, contentType } = require('./validator');
 
+if(process.env.APP_ENV === 'local'){
 
-// const app = express();
+    const app = require('express')();
+    
+    
+    app.get(/\/(.+)/, async function (req, res) {
+        return await run(req, res);
+    });
 
+    app.listen(5001, console.log('listening on 5001'));
+
+}
+    
 
 async function run(req, res) {
     try {
@@ -45,12 +55,6 @@ async function run(req, res) {
         console.error(e.message);
     }
 };
-
-/*app.get(/\/(.+)/, async function (req, res) {
-    return await run(req, res);
-});
-
-app.listen(5001, console.log('listening on 5001'));*/
 
 
 module.exports = run;

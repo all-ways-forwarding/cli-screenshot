@@ -1,12 +1,14 @@
 const chrome = require('chrome-aws-lambda');
 
+    
+
 const puppeteer = require('puppeteer-core');
 
-async function getScreenshot(url, type, quality, fullPage, waitFor) {
+async function getScreenshot(url, type, quality, fullPage) {
     const browser = await puppeteer.launch({
         args: chrome.args,
-        executablePath: await chrome.executablePath,
-        headless: chrome.headless,
+        executablePath: process.env.APP_ENV == 'production' ?  await chrome.executablePath : 'google-chrome',
+        headless: process.env.APP_ENV === 'production' ? chrome.headless : true,
     });
 
     const page = await browser.newPage();
