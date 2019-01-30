@@ -5,7 +5,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "deploy": "now && now alias"
+    "deploy": "now -e APP_ENV=production && now alias"
   },
   "dependencies": {
     "chrome-aws-lambda": "^1.11.2",
