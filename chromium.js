@@ -4,7 +4,7 @@ const chrome = require('chrome-aws-lambda');
 
 const puppeteer = require('puppeteer-core');
 
-async function getScreenshot(url, type, quality, fullPage) {
+async function getScreenshot(url, type, quality, fullPage, landscape = false) {
     const browser = await puppeteer.launch({
         args: chrome.args,
         executablePath: process.env.APP_ENV == 'production' ?  await chrome.executablePath : 'google-chrome',
@@ -20,10 +20,10 @@ async function getScreenshot(url, type, quality, fullPage) {
 
     switch (type) {
         case 'pdf':
-            file = await page.pdf({ printBackground: true });
-            break
+            file = await page.pdf({ printBackground: true, landscape });
+            break;
         default:
-            file = await page.screenshot({ type, quality, fullPage });
+            file = await page.screenshot({ type, quality, fullPage, landscape });
     }
 
     await browser.close();
