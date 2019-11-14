@@ -22,9 +22,10 @@ if(process.env.APP_ENV === 'local'){
 
 async function run(req, res) {
     try {
-        const { path = '/', query = {} } = parse(req.url, true);
+        const { path = '/', query = { margin: ''} } = parse(req.url, true);
 
-        const { type = 'pdf', quality, fullPage, landscape } = query;
+
+        const { type = 'pdf', quality, fullPage, landscape,  margin} = query;
 
         const url = getUrlFromPath(path);
 
@@ -41,7 +42,7 @@ async function run(req, res) {
             res.end(`<h1>Bad Request</h1><p>The type <em>${type}</em> is not valid.</p>`);
         }
         else {
-            const file = await getScreenshot(url, type, qual, fullPage, !!landscape);
+            const file = await getScreenshot(url, type, qual, fullPage, !!landscape, JSON.parse(margin));
             res.statusCode = 200;
             res.setHeader('Content-Type', contentType(type));
             res.end(file);
