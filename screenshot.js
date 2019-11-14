@@ -26,7 +26,6 @@ async function run(req, res) {
 
         const { type = 'pdf', quality, fullPage, landscape,  margin = '{}'} = query;
 
-        const { type = 'pdf', quality, fullPage, landscape,  margin} = query;
 
         const url = getUrlFromPath(path);
 
