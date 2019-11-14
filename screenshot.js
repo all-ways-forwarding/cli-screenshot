@@ -22,8 +22,9 @@ if(process.env.APP_ENV === 'local'){
 
 async function run(req, res) {
     try {
-        const { path = '/', query = { margin: ''} } = parse(req.url, true);
+        const { path = '/', query = {}} = parse(req.url, true);
 
+        const { type = 'pdf', quality, fullPage, landscape,  margin = '{}'} = query;
 
         const { type = 'pdf', quality, fullPage, landscape,  margin} = query;
 
