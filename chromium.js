@@ -6,13 +6,13 @@ async function getScreenshot(url, type, quality, fullPage, landscape = false, ma
 console.log(process.env.APP_ENV);
     if (process.env.APP_ENV !== 'production') {
 
-        const browser = await puppeteer.launch({
+        var browser = await puppeteer.launch({
             args: chrome.args,
             executablePath: 'google-chrome',
             headless: true,
         });
     } else {
-        const browser = await puppeteer.connect({browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.BROWSERLESS_TOKEN}`});
+        var browser = await puppeteer.connect({browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.BROWSERLESS_TOKEN}`});
     }
 
     const page = await browser.newPage();
