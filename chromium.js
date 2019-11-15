@@ -1,7 +1,4 @@
 const chrome = require('chrome-aws-lambda');
-
-    
-
 const puppeteer = require('puppeteer-core');
 
 async function getScreenshot(url, type, quality, fullPage, landscape = false, margin) {

@@ -8,9 +8,9 @@
     "deploy": "now -e APP_ENV=production && now alias"
   },
   "dependencies": {
-    "chrome-aws-lambda": "^1.11.2",
+    "chrome-aws-lambda": "^2.0.0",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
-    "puppeteer-core": "^1.11.0"
+    "puppeteer-core": "^1.20.0"
   }
 }
