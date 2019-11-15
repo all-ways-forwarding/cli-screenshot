@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer-core');
 
 async function getScreenshot(url, type, quality, fullPage, landscape = false, margin) {
 
-
+console.log(process.env.APP_ENV);
     if (process.env.APP_ENV !== 'production') {
 
         const browser = await puppeteer.launch({
