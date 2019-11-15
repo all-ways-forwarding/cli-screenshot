@@ -17,6 +17,7 @@
     }
   ],
   "env": {
-    "BROWSERLESS_TOKEN": "@browserlesstoken"
+    "BROWSERLESS_TOKEN": "@browserlesstoken",
+    "APP_ENV": "@screenshot-env"
   }
 }
