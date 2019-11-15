@@ -11,6 +11,6 @@
     "chrome-aws-lambda": "^2.0.0",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
-    "puppeteer-core": "^1.20.0"
+    "puppeteer-core": "^2.0.0"
   }
 }
