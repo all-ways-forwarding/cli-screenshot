@@ -15,5 +15,8 @@
       "src": "/(.+)",
       "dest": "/screenshot.js"
     }
-  ]
+  ],
+  "env": {
+    "BROWSERLESS_TOKEN": "@browserlesstoken"
+  }
 }
