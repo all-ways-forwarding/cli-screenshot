@@ -3,11 +3,12 @@ const puppeteer = require('puppeteer-core');
 
 async function getScreenshot(url, type, quality, fullPage, landscape = false, margin) {
 
-    const browser = await puppeteer.launch({
-        args: chrome.args,
-        executablePath: process.env.APP_ENV == 'production' ?  await chrome.executablePath : 'google-chrome',
-        headless: process.env.APP_ENV === 'production' ? chrome.headless : true,
-    });
+    // const browser = await puppeteer.launch({
+    //     args: chrome.args,
+    //     executablePath: process.env.APP_ENV == 'production' ?  await chrome.executablePath : 'google-chrome',
+    //     headless: process.env.APP_ENV === 'production' ? chrome.headless : true,
+    // });
+    const browser = await puppeteer.connect({browserWSEndpoint: 'wss://chrome.browserless.io'});
 
     const page = await browser.newPage();
     await page.goto(url, {
