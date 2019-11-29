@@ -24,7 +24,7 @@ async function run(req, res) {
     try {
         const { path = '/', query = {}} = parse(req.url, true);
 
-        const { type = 'pdf', quality, fullPage, landscape,  margin = '{}'} = query;
+        const { fileType = 'pdf', quality, fullPage, landscape,  margin = '{}'} = query;
 
 
         const url = getUrlFromPath(path);
@@ -36,15 +36,15 @@ async function run(req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.end(`<h1>Bad Request</h1><p>The url <em>${url}</em> is not valid.</p>`);
         }
-        if(! isValidType(type)) {
+        if(! isValidType(fileType)) {
             res.statusCode = 400;
             res.setHeader('Content-Type', 'text/html');
-            res.end(`<h1>Bad Request</h1><p>The type <em>${type}</em> is not valid.</p>`);
+            res.end(`<h1>Bad Request</h1><p>The type <em>${fileType}</em> is not valid.</p>`);
         }
         else {
-            const file = await getScreenshot(url, type, qual, fullPage, !!landscape, JSON.parse(margin));
+            const file = await getScreenshot(url, fileType, qual, fullPage, !!landscape, JSON.parse(margin));
             res.statusCode = 200;
-            res.setHeader('Content-Type', contentType(type));
+            res.setHeader('Content-Type', contentType(fileType));
             res.end(file);
         }
 
