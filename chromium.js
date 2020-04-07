@@ -3,15 +3,14 @@ const puppeteer = require('puppeteer-core');
 
 async function getScreenshot(url, type, quality, fullPage, landscape = false, margin) {
 
-console.log(process.env.APP_ENV);
-    if (process.env.APP_ENV !== 'production') {
+    if (process.env.APP_ENV !== 'local') {
+        var browser = await puppeteer.connect({browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.BROWSERLESS_TOKEN}`});
+    } else {
 
         var browser = await puppeteer.launch({
             executablePath: 'google-chrome',
             headless: true,
         });
-    } else {
-        var browser = await puppeteer.connect({browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.BROWSERLESS_TOKEN}`});
     }
 
     const page = await browser.newPage();
