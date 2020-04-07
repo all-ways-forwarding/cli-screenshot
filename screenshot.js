@@ -1,61 +1,32 @@
-const { parse } = require('url');
-const env = require('dotenv').config()
+const {parse} = require('url');
+const env = require('dotenv').config();
+const yargs = require('yargs').argv;
 
 
-const { getScreenshot } = require('./chromium');
+const {getScreenshot} = require('./chromium');
 
-const { getInt, getUrlFromPath, isValidUrl, isValidType, contentType } = require('./validator');
+const { getInt, getUrlFromPath, isValidUrl, isValidType } = require('./validator');
 
-if(process.env.APP_ENV === 'local'){
 
-    const app = require('express')();
-    
-    
-    app.get(/\/(.+)/, async function (req, res) {
-        return await run(req, res);
-    });
+async function run() {
 
-    app.listen(5001, console.log('listening on 5001'));
-
-}
-    
-
-async function run(req, res) {
-    try {
-        const { path = '/', query = {}} = parse(req.url, true);
-
-        const { fileType = 'pdf', quality, fullPage, landscape,  margin = '{}'} = query;
-
+        const {fileType = 'pdf', quality, fullPage, landscape, margin = '{}', path} = yargs;
 
         const url = getUrlFromPath(path);
 
         const qual = getInt(quality);
 
         if (! isValidUrl(url)) {
-            res.statusCode = 400;
-            res.setHeader('Content-Type', 'text/html');
-            res.end(`<h1>Bad Request</h1><p>The url <em>${url}</em> is not valid.</p>`);
+            throw `Bad Request  url ${url} is not valid.`;
         }
-        if(! isValidType(fileType)) {
-            res.statusCode = 400;
-            res.setHeader('Content-Type', 'text/html');
-            res.end(`<h1>Bad Request</h1><p>The type <em>${fileType}</em> is not valid.</p>`);
-        }
-        else {
-            const file = await getScreenshot(url, fileType, qual, fullPage, !!landscape, JSON.parse(margin));
-            res.statusCode = 200;
-            res.setHeader('Content-Type', contentType(fileType));
-            res.end(file);
+
+        if (!isValidType(fileType)) {
+            throw `Bad Request The type ${fileType}  is not valid.`;
+        } else {
+            return  await getScreenshot(url, fileType, qual, fullPage, !!landscape, JSON.parse(margin));
         }
 
 
-    } catch (e) {
-        res.statusCode = 500;
-        res.setHeader('Content-Type', 'text/html');
-        res.end('<h1>Server Error</h1><p>Sorry, there was a problem</p>');
-        console.error(e.message);
-    }
-};
 
-
-module.exports = run;
+}
+run().then(console.log);

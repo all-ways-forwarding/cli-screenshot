@@ -2,8 +2,7 @@ const { URL } = require('url');
 
 const getInt = str => /[0-9]+/.test(str) ? parseInt(str) : undefined;
 
-const getUrlFromPath = str => {
-    let url = str.slice(1);
+const getUrlFromPath = url => {
     if (! url.startsWith('http')) {
         return 'https://' + url;
     }
