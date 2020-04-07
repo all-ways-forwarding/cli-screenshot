@@ -1,5 +1,5 @@
 {
-  "name": "shifl-screenshot-service",
+  "name": "cli-screenshot",
   "version": "1.0.0",
   "main": "screenshot.js",
   "license": "MIT",
