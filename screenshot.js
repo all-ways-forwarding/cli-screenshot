@@ -29,4 +29,5 @@ async function run() {
 
 
 }
-run().then(console.log);
+
+run().then(file => process.stdout.write(file));
