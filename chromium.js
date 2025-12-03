@@ -5,7 +5,8 @@ const {execSync} = require('child_process');
 async function getScreenshot(url, type, quality, fullPage, landscape = false, margin) {
 
     if (process.env.APP_ENV !== 'local') {
-        var browser = await puppeteer.connect({browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.BROWSERLESS_TOKEN}`});
+        var browser = await puppeteer.connect({browserWSEndpoint: `wss://production-sfo.browserless.io?token=${process.env.BROWSERLESS_TOKEN}`});
+
     } else {
         const executablePath = execSync('which google-chrome');
         var browser = await puppeteer.launch({
