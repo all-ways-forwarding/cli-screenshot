@@ -10,6 +10,7 @@ async function getScreenshot(url, type, quality, fullPage, landscape = false, ma
     } else {
         const executablePath = execSync('which google-chrome');
         var browser = await puppeteer.launch({
+            acceptInsecureCerts: true,
             executablePath: executablePath.toString().trim(),
             headless: true,
         });
