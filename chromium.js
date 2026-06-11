@@ -13,6 +13,7 @@ async function getScreenshot(url, type, quality, fullPage, landscape = false, ma
             acceptInsecureCerts: true,
             executablePath: executablePath.toString().trim(),
             headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
         });
     }
 
