@@ -1,6 +1,6 @@
 {
   "name": "cli-screenshot",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "main": "screenshot.js",
   "license": "MIT",
   "private": true,
